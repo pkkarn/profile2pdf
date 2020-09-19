@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF CUstomer</title>
+    <style>
+        .container{
+           text-align: center;
+        }
+        .name{
+           font-size: 50px;
+           border-bottom: 2px solid #333;
+           margin-bottom: 0px;
+        }
+        .about{
+           font-size: 20px;
+           padding: 10px;
+           background-color: black;
+           color: white;
+           padding-top: 20px;
+           border: 1px solid #333;
+        }
+        .pic{
+           height: 300px;
+           border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body class="container">
+<h1 class="name">{{customer.name}}</h1>
+<p class="about">{{customer.about|linebreaks}}</p><br>
+<img class="pic" src='{{customer.pic.path}}'>
+</body>
+</html>
