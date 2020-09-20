@@ -1,0 +1,44 @@
+{% extends 'pdfconvert/base.html' %}
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" class="mt-5 ml-4">
+    {% csrf_token %}
+    <!--{{form.as_p}}-->
+    <div class="form" style="width:50%">
+        <h1 class="display-4 mb-4">Add Profile</h1>
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter Your Name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">About</label>
+          <textarea class="form-control" name="about" rows="3"></textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="form-file">
+            <input type="file" class="form-file-input" name="pic" aria-describedby="inputGroupFileAddon03" id="thanks">
+            <label class="form-file-label">
+              <span class="form-file-text">Choose image...</span>
+              <span class="form-file-button bg text-white">Browse</span>
+            </label>
+          </div>
+        </div>
+        <button class="btn bg text-white">Submit</button>
+    </div>
+    <!--<button class="btn bg text-white">Submit</button>-->
+</form>
+
+<script>
+            $('#inputGroupFile02').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+</script>
+
+
+{% endblock %}
+
+

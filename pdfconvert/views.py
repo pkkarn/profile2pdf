@@ -1,14 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from .models import Customer
 from django.views.generic import ListView
+from .filters import ProfileFilter
+from .forms import CustomerForm
 
 
-class CustomerListView(ListView):
-    model = Customer
-    template_name = 'pdfconvert/main.html'
+def main(request):
+    customers = Customer.objects.all()
+    pfilter = ProfileFilter(request.GET, queryset=customers)
+    customers = pfilter.qs
+    context = {
+        'object_list': customers
+    }
+    return render(request, 'pdfconvert/main.html', context)
+
+
+def add_profile(request):
+    form = CustomerForm()
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('customer_view')
+    return render(request, 'pdfconvert/add_profile.html', {'form': form})
 
 
 def customer_render_pdf(request, pk):
@@ -42,7 +59,7 @@ def render_pdf_view(request, pk):
     }
 
     response = HttpResponse(content_type='application/pdf')  # specifying type of response
-    response['Content-Disposition'] = 'attachment;'+' filename="'+customer.name+'.pdf"'   # This is for download
+    response['Content-Disposition'] = 'attachment;' + ' filename="' + customer.name + '.pdf"'  # This is for download
     # response['Content-Disposition'] = 'filename="report.pdf"'  # to display
     template = get_template(template_path)  # storing template
     html = template.render(context)  # rendcering data into template

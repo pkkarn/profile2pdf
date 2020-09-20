@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>PDF CUstomer</title>
     <style>
-        .container{
-           text-align: center;
+        @page{
+           padding: 20px;
+
         }
+
+
         .name{
-           font-size: 50px;
+           font-size: 40px;
            border-bottom: 2px solid #333;
            margin-bottom: 0px;
         }
@@ -21,15 +24,43 @@
            border: 1px solid #333;
         }
         .pic{
-           height: 300px;
-           border-radius: 50%;
+           height: 200px;
+            border-bottom: 2px solid #000;
+           border-top: 2px solid #000;
+           border-left: 2px solid #000;
+           border-right: 2px solid #000;
+        }
+        .pic1{
+           text-align: center;
+           margin-left:300px;
+           margin-right:300px;
+           margin-top: 5px;
+
+        }
+        .dob{
+           margin-top: 10px;
+           text-align: center;
+            font-size: 20px;
         }
     </style>
 </head>
 
-<body class="container">
-<h1 class="name">{{customer.name}}</h1>
-<p class="about">{{customer.about|linebreaks}}</p><br>
-<img class="pic" src='{{customer.pic.path}}'>
+<body>
+<div class="container">
+    <h1 class="name">{{customer.name}}</h1>
+    <div class="pic1">
+    <img class="pic" src='{{customer.pic.path}}'>
+        </div>
+    <div class="dob">{{customer.dob}}</div>
+    <p class="dob">{{customer.about}}</p>
+    <p class="dob">{{customer.address}}</p>
+    <p class="dob">{{customer.phone_no}}</p>
+    <p class="dob">{{customer.skills}}</p>
+
+
+
+
+
+</div>
 </body>
 </html>
